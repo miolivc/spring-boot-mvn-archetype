@@ -1,0 +1,56 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="pt">
+    <meta charset="UTF-8">
+    <title>Person App</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <style>
+        h1, h2, h3, h4, h5 {
+            margin: 2%;
+            text-align: center;
+        }
+        body {
+            width: 600px;
+            margin: auto;
+        }
+        .button, .button-outline {
+            float: right;
+            margin: 1%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add new Person:</h1>
+
+    <form method="post" th:action="@{/}" th:object="${symbol_dollar}{newPerson}">
+        <label>E-mail: <input type="email" th:field="*{email}"></label>
+        <label>Name: <input type="text" th:field="*{name}"></label>
+
+        <input class= "button" type="submit" value="Save">
+        <input class="button-outline" type="reset" value="Clean ">
+    </form>
+
+    <br><br><br>
+
+    <h1>All Persons:</h1>
+    <table th:fragment="personList">
+        <thead>
+            <td>ID</td>
+            <td>Name</td>
+            <td>E-mail</td>
+        </thead>
+        <tr th:each="person : ${symbol_dollar}{persons}" th:formmethod="GET">
+            <td th:utext="${symbol_dollar}{person.id}"></td>
+            <td th:utext="${symbol_dollar}{person.name}"></td>
+            <td th:utext="${symbol_dollar}{person.email}"></td>
+        </tr>
+    </table>
+</body>
+</html>
